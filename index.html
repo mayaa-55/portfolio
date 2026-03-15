@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maya Attia | Front-End Developer</title>
+<meta name="description" content="Maya Attia Abdelmohsen - Front-End Developer Portfolio | React.js, HTML, CSS, JavaScript">
+
+<style>
+:root {
+  --bg-color: #0f172a;
+  --text-color: #e2e8f0;
+  --accent-color: #38bdf8;
+  --card-bg: #1e293b;
+  --secondary-bg: #334155;
+  --nav-height: 70px;
+  --shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-height);
+}
+
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* Navigation */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5%;
+  height: var(--nav-height);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--secondary-bg);
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-color), #0ea5e9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-links a:hover {
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--accent-color);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 4px;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: var(--text-color);
+  transition: 0.3s;
+  border-radius: 2px;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 5% 5rem;
+  text-align: center;
+  position: relative;
+  background: linear-gradient(135deg, var(--bg-color) 0%, #1e293b 100%);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(56,189,248,0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(56,189,248,0.15) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero-content {
+  max-width: 800px;
+  z-index: 2;
+  position: relative;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.hero span {
+  background: linear-gradient(135deg, var(--accent-color), #0ea5e9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero p {
+  max-width: 600px;
+  margin: 0 auto 2.5rem;
+  color: #94a3b8;
+  font-size: 1.2rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, var(--accent-color), #0ea5e9);
+  color: var(--bg-color);
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(56, 189, 248, 0.3);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(56, 189, 248, 0.4);
+}
+
+/* Sections */
+.section {
+  padding: 6rem 5%;
+}
+
+.section-title {
+  text-align: center;
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(135deg, var(--accent-color), #0ea5e9);
+  border-radius: 2px;
+}
+
+.about-text {
+  max-width: 900px;
+  margin: 0 auto 3rem;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.skill {
+  background: var(--card-bg);
+  padding: 12px 24px;
+  border-radius: 30px;
+  border: 1px solid var(--secondary-bg);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.skill:hover {
+  background: var(--accent-color);
+  color: var(--bg-color);
+  transform: translateY(-2px);
+  border-color: var(--accent-color);
+}
+
+/* Projects */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.project-card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--secondary-bg);
+  transition: all 0.4s ease;
+  height: 100%;
+}
+
+.project-card:hover {
+  transform: translateY(-12px);
+  box-shadow: var(--shadow);
+  border-color: var(--accent-color);
+}
+
+.project-image {
+  height: 220px;
+  background: linear-gradient(135deg, var(--accent-color), #0ea5e9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bg-color);
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.card-content {
+  padding: 2rem;
+}
+
+.card-content h3 {
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+}
+
+.card-content p {
+  color: #94a3b8;
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tech-stack .skill {
+  padding: 6px 16px;
+  font-size: 0.85rem;
+}
+
+/* Contact */
+.contact {
+  text-align: center;
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 4rem 2rem;
+  max-width: 600px;
+  margin: 0 auto 4rem;
+  border: 1px solid var(--secondary-bg);
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.contact-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  background: var(--secondary-bg);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.contact-links a:hover {
+  background: var(--accent-color);
+  color: var(--bg-color);
+  transform: translateY(-2px);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 3rem 5%;
+  color: #64748b;
+  border-top: 1px solid var(--secondary-bg);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hamburger { display: flex; }
+  .nav-links {
+    position: fixed;
+    top: var(--nav-height);
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - var(--nav-height));
+    background: rgba(15,23,42,0.98);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 3rem;
+    gap: 2rem;
+    transition: left 0.3s ease;
+  }
+  .nav-links.active { left: 0; }
+  
+  .hero { padding: 0 5% 3rem; }
+  .section { padding: 4rem 5%; }
+  
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section { padding: 3rem 5%; }
+  .hero h1 { font-size: 2.5rem; }
+}
+</style>
+</head>
+
+<body>
+<!-- Navigation -->
+<nav>
+  <div class="logo">My Portfolio</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="home" class="hero">
+  <div class="hero-content">
+   <br> <h1><br> Hi I'm <br><span>Maya Attia Abdelmohsen</span></h1>
+    <p>
+      Frontend Developer (React.js) | DEPI Trainee.<br> I build modern responsive websites 
+      using HTML, JavaScript, React.js and modern web technologies.
+    </p>
+    <a href="#projects" class="btn">View My Work</a>
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="section">
+  <h2 class="section-title">About Me</h2>
+  <p class="about-text">
+    I am a third-year Computer Science student at MTI University with a passion for Front-End Development.
+    I enjoy creating modern and user-friendly web interfaces that provide exceptional user experiences.
+  </p>
+  <p class="about-text">
+    Previously worked as a Customer Service Representative at Teleperformance Egypt (April 2024 – January 2025) 
+    where I developed strong communication, multitasking, and problem-solving skills.
+  </p>
+  <p class="about-text">
+    Enrolled in the Digital Egypt Pioneers Initiative React.js course and continuously working on improving my web development skills.
+  </p>
+  
+  <div class="skills">
+    <div class="skill">HTML</div>
+    <div class="skill">CSS</div>
+    <div class="skill">JavaScript</div>
+    <div class="skill">React.js</div>
+    <div class="skill">C++</div>
+    
+    <div class="skill">Excel</div>
+  
+  </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="section">
+  <h2 class="section-title"> Projects</h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-image">👥</div>
+      <div class="card-content">
+        <h3>Dishify Website</h3>
+        <div class="tech-stack">
+          <span class="skill">html</span>
+          <span class="skill">css</span>
+          
+        </div>
+        <p>
+          University project where I designed comprehensive system architecture using UML diagrams 
+          including Use Case, Sequence, Activity, and Class diagrams for a website.
+        </p>
+        <a href="#" class="btn">View Project →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-image">🌐</div>
+      <div class="card-content">
+        <h3>Front-End Practice Projects</h3>
+        <div class="tech-stack">
+          <span class="skill">HTML</span>
+          <span class="skill">CSS</span>
+          <span class="skill">JavaScript</span>
+          <span class="skill">Responsive Design</span>
+        </div>
+        <p>
+          Collection of 5+ responsive web pages showcasing modern UI/UX design principles 
+          and advanced CSS animations with pixel-perfect responsive layouts.
+        </p>
+        <a href="#" class="btn">View Projects →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-image">⚛️</div>
+      <div class="card-content">
+        <h3>React.js Applications</h3>
+        <div class="tech-stack">
+          <span class="skill">React.js</span>
+          <span class="skill">JavaScript</span>
+          <span class="skill">Components</span>
+          <span class="skill">State Management</span>
+        </div>
+        <p>
+          Interactive web applications built during Digital Egypt Pioneers Initiative 
+          featuring component-based architecture and modern React patterns.
+        </p>
+        <a href="#" class="btn">View Code →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="section">
+  <div class="contact">
+    <h2 class="section-title">Let's Work Together</h2>
+    <p style="color: #94a3b8; font-size: 1.2rem; margin-bottom: 2rem;">
+      If you would like to collaborate or have any opportunities, feel free to reach out.
+    </p>
+    
+    <div class="contact-links">
+      <a href="mailto:mayooo.tito@gmail.com">
+        📧 Email Me
+      </a>
+      <a href="https://www.linkedin.com/in/maya-attia5" target="_blank">
+        💼 LinkedIn Profile
+      </a>
+      <a href="https://github.com/mayaa-55
+" target="_blank">
+        💻 GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>© 2025 Maya Attia Abdelmohsen. Built with ❤️ and modern web technologies.</p>
+</footer>
+
+<script>
+function toggleMenu() {
+  const navLinks = document.getElementById('navLinks');
+  navLinks.classList.toggle('active');
+  
+  // Close menu when clicking on a link
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+    });
+  });
+}
+
+// Intersection Observer for scroll animations
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.animationPlayState = 'running';
+    }
+  });
+}, observerOptions);
+
+// Observe all sections
+document.querySelectorAll('.section').forEach(section => {
+  observer.observe(section);
+});
+</script>
+</body>
+</html>
